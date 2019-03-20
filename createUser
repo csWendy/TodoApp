@@ -1,0 +1,12 @@
+#! /bin/bash
+
+newUser='testuser'
+newDbPassword='testpwd'
+newDb='todoapp'
+host=todoapp.cgya4a2lrtxt.us-east-1.rds.amazonaws.com
+#host='%'
+
+commands="CREATE DATABASE \`${todoapp}\`;CREATE USER '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT USAGE ON *.* TO '${newUser}'@'${host}' IDENTIFIED BY '${newDbPassword}';GRANT ALL privileges ON \`${newDb}\`.*
+TO '${newUser}'@'${host}';FLUSH PRIVILEGES;"
+
+echo "${commands}" | /usr/bin/mysql -u root -p

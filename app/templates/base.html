@@ -1,0 +1,14 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Todo App</title>
+      {% else %}
+      <title>Welcome to Todo App</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Todo App: <a href="/">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

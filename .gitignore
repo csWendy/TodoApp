@@ -1,0 +1,15 @@
+__pycache__
+.DS_Store
+*/.DS_Store
+/node_modules
+*.pyc
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+.DS_STORE
+venv.bak/
