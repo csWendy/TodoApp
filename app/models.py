@@ -35,25 +35,29 @@ class User(UserMixin,db.Model):
     __tablename__ = "user"
     id = db.Column('id',db.Integer,primary_key = True)
     username = db.Column(db.String(50),unique=True,nullable=False)
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
     todo_item = db.relationship('Todo_item',backref='user',lazy=True)
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-    def __repr__(self):
-        return '<User %r>' % self.username
 
     def __init__(self,username):
         self.username = username
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
 class Todo_item(db.Model):
     __tablename__ = "todo_items"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column('todo_id',db.Integer, primary_key=True)
     items = db.Column(db.String(100),nullable=False)
     completed = db.Column(db.Boolean,nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)

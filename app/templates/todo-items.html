@@ -2,7 +2,9 @@
 
 {% block content %}
     <h1>Todo App</h1>
-    <h2> Hi, {{ current_user.username }}!</h2>
+    {% if current_user.is_authenticated %}
+    Hi {{ current_user.username }}!
+    {% endif %}
     <a href="/new-item">New Item</a>
     <ul>
       {% for item in todo_item %}
