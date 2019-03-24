@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html"%}
+
+{% block content %}
   <body style="background-color:powderblue;">
-      <h1>Todo App</h1>
-      <a href="/register">register</a>
-      <a href="/login">login</a>
+    {% if current_user.is_authenticated %}
+    <h1>Hi {{ current_user.username }}!</h1>
+    {% else %}
+    <a href="/register">register</a>
+    {% endif %}
     <p>My to do list depends on today's weather!</p>
     <P>The weather in NYC in spring is really......! </p>
     <img src="http://drive.google.com/uc?export=view&id=1WetA4iFgGbca752ZWtQmvg-VmAF19-0n"width="200"
 height="300">
     <p> Let's check up today's weather <a href="https://weather.com/weather/hourbyhour/l/USNY0996:1:US">Real time weather</a></p>
-
 
     <h2>So My To Do List Today!</h2>
 <ol>
@@ -20,4 +22,4 @@ height="300">
   <li> <a href= "https://bodenyc.com"> Hot yoga </a> </li>
 </ol>
   </body>
-</html>
+{% endblock %}

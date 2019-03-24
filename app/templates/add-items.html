@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Add items</h1>
+    <form action ="" method="post">
+      {{form.hidden_tag()}}
+      {% if current_user.is_authenticated %}
+      Hi {{ current_user.username }}!
+      {% endif %}
+      <p>
+        {{ form.username.label }}<br>
+        {{ form.username(size=32) }}<br>
+        {% for error in form.username.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+      </p>
+
+      <ul>
+        {{form.add_item.label}}<br>
+        {{form.add_item(cols=50,rows=100)}}<br>
+        {%for error in form.add_item.errors%}
+        <span style = "color:red;">[{{error}}]</span>
+        {% endfor %}
+
+        <!-- {% for item in items %}
+          <li>
+            {% if item.completed %}
+              <del>{{item.content}}</del>
+            {% else %}
+              {{item.content}} <a href="{{url_for('completed_item', id = Todo_item.id)}}">Completed</a>
+            {% endif %}
+              <a href="{{url_for('delete_item', id = Todo_item.id)}}">Delete</a>
+          </li>
+        {% endfor %} -->
+      </ul>
+      <p> {{form.submit()}}</p>
+    <!-- <a href="/new-item">New Item</a> -->
+{% endblock %}

@@ -3,10 +3,8 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 @login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-    #The id that Flask-Login passes to the function as an argument is going to be a string,
-    #so databases that use numeric IDs need to convert the string to integer as above.
+def load_user(id):#The id that Flask-Login passes to the function as an argument is going to be a string,
+    return User.query.get(int(id))#so databases that use numeric IDs need to convert the string to integer as above.
 
 # @login_manager.request_loader
 # def load_user_from_request(request):
@@ -40,18 +38,6 @@ class User(UserMixin,db.Model):
     def __init__(self,username):
         self.username = username
 
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return unicode(self.id)
-
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -68,7 +54,7 @@ class Todo_item(db.Model):
     # def __init__(self,items):
     #     self.items = items
 
-    def add_item(self):
-      db.session.add(self)
-      db.session.commit()
-      print("item added:", self.item)
+    # def add_item(self):
+    #   db.session.add(self)
+    #   db.session.commit()
+    #   print("item added:", self.item)
