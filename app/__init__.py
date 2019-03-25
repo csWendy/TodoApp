@@ -14,9 +14,7 @@ migrate = Migrate(app,db)
 login = LoginManager(app)
 login.login_view = 'login'
 
-@app.before_first_request
-def create_tables():
-  db.create_all()
+
 
 #circular imports.
 #routes module needs to import the app variable defined in this script,

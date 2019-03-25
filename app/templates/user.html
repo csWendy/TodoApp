@@ -2,7 +2,9 @@
 {% block content %}
     <h1>User: {{ user.username }}</h1>
     <hr>
+    {%for item in todo_item%}
     <p>
-    <b>{{ todo_items.items }}</b>
+      {{item.user.username}} to do is <b>{{ todo_items.items }}</b>
     </p>
+    {%endfor%}
 {% endblock %}

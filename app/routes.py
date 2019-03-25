@@ -49,8 +49,8 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    todos= Todo_item.query.filter_by(user_id=user.id).all()
-    return render_template('user.html',user=user,todos=todos)
+    # todos= Todo_item.query.filter_by(user_id=user.id).all()
+    return render_template('user.html',user=user)
 
 @app.route('/add-items',methods=['GET', 'POST'])
 @login_required
@@ -61,7 +61,7 @@ def add_items():
         todo=Todo_item(items=form.items.data)
         db.session.add(todo)
         db.session.commit()
-        flash('Your Todo Items have been saved.')
+        flash('Your Todo Items have been added.')
         return redirect(url_for('add-items'))
     elif request.method == 'GET':
         form.username.data = current_user.username
