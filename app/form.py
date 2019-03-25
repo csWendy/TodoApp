@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, PasswordField, BooleanField,TextAreaField,SubmitField
 from wtforms.validators import ValidationError, DataRequired, EqualTo,Length
 from app.models import User
 
@@ -23,10 +23,10 @@ class RegistrationForm(FlaskForm):
 
 class AddItemForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
-    items = StringField('Todo Items',validators=[DataRequired()])
+    items = TextAreaField('Todo Items',validators=[Length(min=0,max=140)])
     submit = SubmitField('Add')
 
 class DeleteTodoForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
-    todo_item = StringField('Todo Items',validators=[DataRequired()])
+    items = TextAreaField('Todo Items',validators=[Length(min=0,max=140)])
     submit = SubmitField('Delete')

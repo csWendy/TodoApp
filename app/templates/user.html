@@ -1,16 +1,16 @@
 {% extends "base.html" %}
+
 {% block content %}
     <h1>User: {{user.username}}</h1>
-    <hr>
-    {%for item in todo_item%}
-    <p>
-      {{item.user.username}} to do is <b>{{ todo_items.items }}</b>
-    </p>
-    {%endfor%}
-
-    {% if user == current_user %}
     <form action ="" method="post">
-      {{form.hidden_tag()}}
+        {{form.hidden_tag()}}
+    <hr>
+      <p>
+      {%for item in todo_item%}
+      {{item.user.username}} to do is <b>{{ todo_items.items }}</b>
+      {%endfor%}
+     </p>
+
       <p>
         {{ form.username.label }}<br>
         {{ form.username(size=32) }}<br>
@@ -18,10 +18,9 @@
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
       </p>
-
-      <ul>
+      <p>
         {{form.items.label}}<br>
-        {{form.items(cols=50,rows=100)}}<br>
+        {{form.items(cols=50,rows=5)}}<br>
         {%for error in form.items.errors%}
         <span style = "color:red;">[{{error}}]</span>
         {% endfor %}
@@ -36,7 +35,7 @@
               <a href="{{url_for('delete_item', id = Todo_item.id)}}">Delete</a>
           </li>
         {% endfor %} -->
-      </ul>
+      </p>
       <p> {{form.submit()}}</p>
-    {% endif %}
+   </form>
 {% endblock %}
