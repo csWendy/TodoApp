@@ -45,28 +45,38 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route('/user/<username>')
+@app.route('/user/<username>',methods=['GET', 'POST'])
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    # todos= Todo_item.query.filter_by(user_id=user.id).all()
-    return render_template('user.html',user=user)
-
-@app.route('/add-items',methods=['GET', 'POST'])
-@login_required
-def add_items():
     form = AddItemForm()
     if form.validate_on_submit():
         current_user.username = form.username.data
-        todo=Todo_item(items=form.items.data)
-        db.session.add(todo)
+        todos= Todo_item(items=form.items.data,user=current_user)
+        db.session.add(todos)
         db.session.commit()
         flash('Your Todo Items have been added.')
-        return redirect(url_for('add-items'))
-    elif request.method == 'GET':
-        form.username.data = current_user.username
-        form.todo_item = current_user.todo_items
-    return render_template('add-items.html', title='Add items',form=form)
+    #     return redirect(url_for('user'))
+    # elif request.method == 'GET':
+    #     form.username.data = current_user.username
+    #     form.items.data = current_user.items
+    return render_template('user.html',user=user,form=form)
+
+# @app.route('/add-items',methods=['GET', 'POST'])
+# @login_required
+# def add_items():
+#     form = AddItemForm()
+#     if form.validate_on_submit():
+#         current_user.username = form.username.data
+#         todos=Todo_item(items=form.items.data,user=current_user)
+#         db.session.add(todo)
+#         db.session.commit()
+#         flash('Your Todo Items have been added.')
+#         return redirect(url_for('user'))
+#     elif request.method == 'GET':
+#         form.username.data = current_user.username
+#         form.todo_item = current_user.todo_items
+#     return render_template('add-items.html', title='Add items',form=form)
 
 #     if request.method == 'POST':
 #             todo = Todo_item(request.form['items'])

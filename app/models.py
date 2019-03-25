@@ -45,7 +45,7 @@ class Todo_item(db.Model):
     __tablename__ = "todo_items"
     id = db.Column('todo_id',db.Integer, primary_key=True)
     items = db.Column(db.String(100),nullable=False)
-    completed = db.Column(db.Boolean,nullable=False)
+    completed = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=False)
 
     def __repr__(self):
