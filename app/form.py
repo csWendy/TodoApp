@@ -26,7 +26,12 @@ class AddItemForm(FlaskForm):
     items = TextAreaField('Todo Items',validators=[Length(min=0,max=140)])
     submit = SubmitField('Add')
 
-class DeleteTodoForm(FlaskForm):
+class DeleteItemForm(FlaskForm):
     username = StringField('Username',validators=[DataRequired()])
     items = TextAreaField('Todo Items',validators=[Length(min=0,max=140)])
     submit = SubmitField('Delete')
+    
+class CompletedItemForm(FlaskForm):
+    username = StringField('Username',validators=[DataRequired()])
+    items = TextAreaField('Todo Items',validators=[Length(min=0,max=140)])
+    submit = SubmitField('Completed')

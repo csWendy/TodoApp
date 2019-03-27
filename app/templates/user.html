@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>User: {{user.username}}</h1>
-    <form action ="" method="post">
-        {{form.hidden_tag()}}
+    <h1>Hi: {{user.username}}</h1>
     <hr>
       <p>
       {%for item in todo_item%}
@@ -11,19 +9,23 @@
       {%endfor%}
      </p>
 
-      <p>
+    <form action ="" method="post">
+        {{form.hidden_tag()}}
+      <!-- <p>
         {{ form.username.label }}<br>
         {{ form.username(size=32) }}<br>
         {% for error in form.username.errors %}
         <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
-      </p>
+      </p> -->
       <p>
-        {{form.items.label}}<br>
-        {{form.items(cols=50,rows=1)}}<br>
+        {{form.items.label}}
+        {{form.items(cols=50,rows=1)}}
         {%for error in form.items.errors%}
         <span style = "color:red;">[{{error}}]</span>
-        {% endfor %}
+        {% endfor %}  {{form.submit()}}
+      </p>
+      </form>
 
         <!-- {% for item in items %}
           <li>
@@ -35,7 +37,5 @@
               <a href="{{url_for('delete_item', id = Todo_item.id)}}">Delete</a>
           </li>
         {% endfor %} -->
-      </p>
-      <p> {{form.submit()}}</p>
-   </form>
+
 {% endblock %}
